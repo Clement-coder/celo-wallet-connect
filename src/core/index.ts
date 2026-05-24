@@ -1,0 +1,1 @@
+export { CeloWalletClient } from "./client";

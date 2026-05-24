@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Celo Wallet Connect — Vanilla JS</title>
+</head>
+<body>
+  <h1>Celo Wallet Connect</h1>
+  <button id="connect">Connect MetaMask</button>
+  <button id="disconnect" style="display:none">Disconnect</button>
+  <p id="status">Not connected</p>
+  <p id="balance"></p>
+
+  <script type="module">
+    import { CeloWalletClient } from "celo-wallet-connect";
+
+    const client = new CeloWalletClient({ defaultChainId: 42220 });
+
+    const connectBtn = document.getElementById("connect");
+    const disconnectBtn = document.getElementById("disconnect");
+    const statusEl = document.getElementById("status");
+    const balanceEl = document.getElementById("balance");
+
+    // Subscribe to state changes
+    client.subscribe((state) => {
+      if (state.status === "connected") {
+        statusEl.textContent = `Connected: ${state.address}`;
+        connectBtn.style.display = "none";
+        disconnectBtn.style.display = "inline";
+        // Fetch balance
+        client.getBalance().then((b) => {
+          balanceEl.textContent = `Balance: ${b.formatted} ${b.symbol}`;
+        });
+      } else {
+        statusEl.textContent = state.error?.message ?? "Not connected";
+        connectBtn.style.display = "inline";
+        disconnectBtn.style.display = "none";
+        balanceEl.textContent = "";
+      }
+    });
+
+    connectBtn.addEventListener("click", () => client.connectWallet("metamask"));
+    disconnectBtn.addEventListener("click", () => client.disconnectWallet());
+  </script>
+</body>
+</html>
