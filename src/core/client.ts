@@ -4,7 +4,7 @@
  */
 import { createPublicClient, http } from "viem";
 import { CELO_NETWORKS, DEFAULT_CHAIN_ID } from "../constants";
-import { WalletNotConnectedError, WalletNotFoundError } from "../errors";
+import { WalletNotConnectedError, WalletNotFoundError, UnsupportedNetworkError } from "../errors";
 import { MetaMaskConnector } from "../wallets/metamask";
 import { ValoraConnector } from "../wallets/valora";
 import { MiniPayConnector } from "../wallets/minipay";
@@ -47,7 +47,7 @@ export class CeloWalletClient {
       autoConnect: config.autoConnect ?? false,
     };
 
-    this.connectors = new Map([
+    this.connectors = new Map<WalletId, WalletConnector>([
       ["metamask", new MetaMaskConnector()],
       ["valora", new ValoraConnector()],
       ["minipay", new MiniPayConnector()],
@@ -130,6 +130,7 @@ export class CeloWalletClient {
     const chainId = (this.state.chainId ?? this.config.defaultChainId) as CeloChainId;
     assertCeloNetwork(chainId);
     const network = CELO_NETWORKS[chainId];
+    if (!network) throw new UnsupportedNetworkError(chainId);
 
     const client = createPublicClient({ transport: http(network.rpcUrl) });
     const value = await client.getBalance({ address: target });

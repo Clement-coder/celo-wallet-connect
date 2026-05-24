@@ -4,10 +4,25 @@
   "description": "Production-ready SDK for connecting and interacting with Celo wallets in React, Next.js, and Vanilla JS",
   "author": "TaskFlow",
   "license": "MIT",
-  "keywords": ["celo", "wallet", "web3", "react", "hooks", "metamask", "valora", "minipay", "walletconnect"],
+  "keywords": [
+    "celo",
+    "wallet",
+    "web3",
+    "react",
+    "hooks",
+    "metamask",
+    "valora",
+    "minipay",
+    "walletconnect"
+  ],
   "homepage": "https://github.com/your-org/celo-wallet-connect#readme",
-  "repository": { "type": "git", "url": "https://github.com/your-org/celo-wallet-connect.git" },
-  "bugs": { "url": "https://github.com/your-org/celo-wallet-connect/issues" },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/celo-wallet-connect.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-org/celo-wallet-connect/issues"
+  },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -28,7 +43,11 @@
       "types": "./dist/providers/index.d.ts"
     }
   },
-  "files": ["dist", "README.md", "LICENSE"],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "sideEffects": false,
   "scripts": {
     "build": "tsup",
@@ -47,8 +66,12 @@
     "react-dom": ">=18.0.0"
   },
   "peerDependenciesMeta": {
-    "react": { "optional": true },
-    "react-dom": { "optional": true }
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
   },
   "dependencies": {
     "viem": "^2.21.0"
@@ -60,6 +83,7 @@
     "@vitest/coverage-v8": "^1.6.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
+    "jsdom": "^29.1.1",
     "prettier": "^3.3.0",
     "react": "^18.3.0",
     "tsup": "^8.1.0",

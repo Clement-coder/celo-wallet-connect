@@ -21,12 +21,13 @@ describe("hexToChainId / chainIdToHex", () => {
     expect(hexToChainId("0xA4EC")).toBe(42220);
   });
   it("converts chainId to hex", () => {
-    expect(chainIdToHex(42220)).toBe("a4ec");
+    expect(chainIdToHex(42220)).toBe("0xa4ec");
   });
 });
 
 describe("isBrowser", () => {
-  it("returns false in Node/test environment", () => {
-    expect(isBrowser()).toBe(false);
+  it("returns true in jsdom test environment", () => {
+    // jsdom provides window, so isBrowser() correctly returns true here
+    expect(isBrowser()).toBe(true);
   });
 });

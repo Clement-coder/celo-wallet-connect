@@ -34,6 +34,7 @@ export class WalletConnectConnector implements WalletConnector {
     try {
       // Dynamically import to keep it optional
       const { EthereumProvider } = await import(
+        /* @vite-ignore */
         "@walletconnect/ethereum-provider" as string
       ).catch(() => {
         throw new WalletNotFoundError("walletconnect");
